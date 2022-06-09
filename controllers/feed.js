@@ -1,12 +1,13 @@
 const fs = require('fs');
 const path = require('path');
-
+            
+const image = '../images/image.jpg';
+console.log(typeof image);
 exports.getPhoto = (req, res, next) => {
     res.status(200).json({
       photo: [
         {
-         // title: 'First Post',
-          imageUrl: 'images/image.jpg',
+          imageUrl: image,
           createdAt: new Date()
         }
       ]
