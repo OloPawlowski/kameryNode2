@@ -25,4 +25,4 @@ app.use('/feed', feedRoutes);
 //     res.status(status).json({ message: message });
 // });
 
-app.listen(8080);
+app.listen(3000);
