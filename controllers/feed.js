@@ -2,15 +2,12 @@ const fs = require('fs');
 const path = require('path');
 const rootDir = require('../lane/path');
 
-//router.get('/files/recent/', (req, res) => {
 exports.getPhoto = (req, res) => {
 
   const cameraId = req.params.cameraId + '/';
 
   let date = new Date();
   let year = date.getFullYear().toString() + '-';
-//  let hour = date.getHours(); 
-//  let minute = date.getMinutes();
   let month = date.getMonth() + 1
   if (month < 10) month = '0' + month;
   month = month.toString() +  '-';
@@ -24,14 +21,8 @@ exports.getPhoto = (req, res) => {
       month +
       '08',
       'pic_001/'
-      // '/001',
-      // '/jpg/' +
-      // '22/' +
-      // '03/'
-    //  '/54[R][0@0][0].jpg'
   );
-  //let filePath = path.join(rootDir, pathway); //  __dirname, '../', pathway
-  
+  //let filePath = path.join(rootDir, pathway); //  __dirname, '../', pathway  
   // const dirPath = process.env.DIR_PATH; //scieżka do folderu ze zdjęciami
   const dirPath = path.join(rootDir, pathway); //scieżka do folderu ze zdjęciami
   const getMostRecentFile = (dir) => {    //funkcja zwracająca najnowszy plik korzystając z sortowania
@@ -51,7 +42,6 @@ exports.getPhoto = (req, res) => {
   };
   
   try {
-    console.log(pathway);
     let mostRecentfile = getMostRecentFile(dirPath);
     if (!mostRecentfile) {
       return res.status(404).json({ error: 'Not Found.' }); //w przypadku braku pliku zwracamy 404
@@ -63,4 +53,4 @@ exports.getPhoto = (req, res) => {
   }
 };
 
-//});
+
