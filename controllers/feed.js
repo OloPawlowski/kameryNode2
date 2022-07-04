@@ -42,8 +42,9 @@ exports.getPhoto = (req, res) => {
     if (!mostRecentfile) {
       return res.status(404).json({ error: 'Not Found.' });
     }
-    // res.status(200).json({photo: pathway});
-    return res.sendFile(dirPath + mostRecentfile.file); //  dirPath + 'images/' + mostRecentfile.file
+    // let photo = path.join(dirPath + mostRecentfile.file);
+    //  res.status(200).json({photo: photo});
+   return res.sendFile(dirPath + mostRecentfile.file); //  dirPath + 'images/' + mostRecentfile.file
   } catch (error) {
     return res.status(500).json({ error: 'Something went wrong.' });
   }
