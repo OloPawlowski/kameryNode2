@@ -8,18 +8,14 @@ exports.getPhoto = (req, res) => {
   const date = new Date();
   const year = date.getFullYear() + '-';
   let month = date.getMonth() + 1;
-  month = 6;
   if (month < 10) month = '0' + month;
   month +=  '-';
   let day = date.getDate() + '/';
-  day = 8;
   if (day < 10) day = '0' + day + '/';
   const YearMonthDay = year + month + day;
 
   const pathway = path.join('images/', cameraId, YearMonthDay, 'pic_001/');
   const dirPath = process.env.DIR_PATH + pathway;
-  //const dirPath = path.join(rootDir, pathway);
-  console.log(dirPath);
 
   const getMostRecentFile = (dir) => {
     const files = orderReccentFiles(dir);
