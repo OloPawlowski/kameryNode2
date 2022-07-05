@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const feedRoutes = require('./routes/feed');
+const cors = require('cors');
 require('dotenv').config({path: '.env'});
 
 const app = express();
