@@ -17,16 +17,16 @@ exports.getPhoto = (req, res) => {
   const YearMonthDay = year + month + day;
 
   const pathway = path.join('images/', cameraId, YearMonthDay, 'pic_001/');
-  //let filePath = path.join(rootDir, pathway); //  __dirname, '../', pathway
-  // const dirPath = process.env.DIR_PATH; //scieżka do folderu ze zdjęciami
-  const dirPath = path.join(rootDir, pathway);
+  const dirPath = process.env.DIR_PATH + pathway;
+  //const dirPath = path.join(rootDir, pathway);
+  console.log(dirPath);
 
-  const getMostRecentFile = (dir) => {    //funkcja zwracająca najnowszy plik korzystając z sortowania
+  const getMostRecentFile = (dir) => {
     const files = orderReccentFiles(dir);
     return files.length ? files[0] : undefined;
   };
 
-  const orderReccentFiles = (dir) => {    //sortowanie plików po dacie utworzenia, od najnowszego
+  const orderReccentFiles = (dir) => {
     return fs
       .readdirSync(dir)
       .filter((file) => fs.lstatSync(path.join(dir, file)).isFile())
@@ -42,9 +42,7 @@ exports.getPhoto = (req, res) => {
     if (!mostRecentfile) {
       return res.status(404).json({ error: 'Not Found.' });
     }
-    // let photo = path.join(dirPath + mostRecentfile.file);
-    //  res.status(200).json({photo: photo});
-   return res.sendFile(dirPath + mostRecentfile.file); //  dirPath + 'images/' + mostRecentfile.file
+   return res.sendFile(dirPath + mostRecentfile.file);
   } catch (error) {
     return res.status(500).json({ error: 'Something went wrong.' });
   }
