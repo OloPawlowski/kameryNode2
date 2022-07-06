@@ -7,15 +7,16 @@ exports.getPhoto = (req, res) => {
 
   const date = new Date();
   const year = date.getFullYear() + '-';
-  let month = date.getMonth() + 1;
-  if (month < 10) month = '0' + month;
-  month +=  '-';
-  let day = date.getDate() + '/';
-  if (day < 10) day = '0' + day + '/';
-  const YearMonthDay = year + month + day;
+  let month = (date.getMonth() + 1).toString().padStart(2, '0') + '-';
+  let day = date.getDate().toString().padStart(2, '0') + '/';
+  const yearMonthDay = year + month + day;
 
-  const pathway = path.join('images/', cameraId, YearMonthDay, 'pic_001/');
-  const dirPath = process.env.DIR_PATH + pathway;
+  const dirPath = path.join(
+    process.env.DIR_PATH,
+    cameraId,
+    yearMonthDay,
+    'pic_001/'
+  );
 
   const getMostRecentFile = (dir) => {
     const files = orderReccentFiles(dir);
@@ -38,7 +39,7 @@ exports.getPhoto = (req, res) => {
     if (!mostRecentfile) {
       return res.status(404).json({ error: 'Not Found.' });
     }
-   return res.sendFile(dirPath + mostRecentfile.file);
+    return res.sendFile(dirPath + mostRecentfile.file);
   } catch (error) {
     return res.status(500).json({ error: 'Something went wrong.' });
   }
